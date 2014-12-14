@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="nanoplex-pugins-preveiw" attributes="bgcolor color">
+  <template>
+    <core-ajax auto url="/plugins/plugins.json" handleAs="json" response="{{plugins}}"></core-ajax>
+
+    <link rel="stylesheet" href="nanoplex-pugins-preveiw.css">
+    <div class="info" layout vertical center>
+      <h1>Plugins</h1>
+      <p>Compellingly underwhelm backend data through integrated services. Rapidiously formulate top-line methodologies before excellent e-markets. Distinctively coordinate diverse platforms after competitive testing procedures. Holisticly reintermediate resource maximizing platforms for next-generation systems. Dramatically harness 24/365 customer service rather than high standards in convergence.</p>
+    </div>
+    <div class="plugins" layout horizontal>
+      <template repeat="{{plugin in plugins}}">
+        <div class="plugin">
+          <h2>{{plugin.name}}</h2>
+          <p>{{plugin.description}}</p>
+          <paper-button>download</paper-button>
+          <a href=""><paper-button>read more</paper-button></a>
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        ready: function() {
+           this.setAttribute('style','background:' + this.bgcolor + ';color:' + this.color);
+        },
+      });
+
+    })();
+  </script>
+</polymer-element>

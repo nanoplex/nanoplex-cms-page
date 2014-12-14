@@ -1,0 +1,22 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+
+<polymer-element layout vertical center name="nanoplex-donate" attributes="bgcolor color">
+  <template>
+    <link rel="stylesheet" href="nanoplex-donate.css">
+    <p>consider donating if you like my work</p>
+    <paper-button>donate</paper-button>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        ready: function() {
+          this.setAttribute('style','background:' + this.bgcolor + ';color:' + this.color);
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>

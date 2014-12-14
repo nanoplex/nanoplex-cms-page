@@ -1,0 +1,94 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="/bower_components/core-media-query/core-media-query.html">
+<link rel="import" href="/bower_components/core-menu-button/core-menu-button.html">
+<link rel="import" href="/bower_components/core-dropdown/core-dropdown.html">
+<link rel="import" href="/bower_components/core-menu/core-menu.html">
+
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+
+<link rel="import" href="../nanoplex-downloads/nanoplex-downloads.html">
+<link rel="import" href="../nanoplex-donate/nanoplex-donate.html">
+<link rel="import" href="../nanoplex-pugins-preveiw/nanoplex-pugins-preveiw.html">
+
+<polymer-element name="nanoplex-cms-page" attributes="">
+   <template>
+      <core-media-query query="max-width: 650px" queryMatches="{{smallScreen}}"></core-media-query>
+
+      <link rel="stylesheet" href="nanoplex-cms-page.css">
+
+      <paper-shadow z="1">
+         <core-toolbar>
+            <a href="/" layout horizontal center flex><img src="/img/logo.svg"/><p>Nanoplex CMS</p></a>
+            <template if="{{!smallScreen}}">
+               <a href="/?start">getting started</a>
+               <a href="/?feedback">feedback</a>
+               <a href="/?plugins">plugins</a>
+               <a href="/?docs">docs</a>
+            </template>
+            <template if="{{smallScreen}}">
+               <core-menu-button>
+                  <paper-icon-button icon="menu"></paper-icon-button>
+                     <core-dropdown class="dropdown" halign="right" layered>
+                        <core-menu>
+                           <paper-item><a href="/">home</a></paper-item>
+                           <paper-item><a href="/?start">getting started</a></paper-item>
+                           <paper-item><a href="/?feedback">feedback</a></paper-item>
+                           <paper-item><a href="/?plugins">plugins</a></paper-item>
+                           <paper-item><a href="/?docs">docs</a></paper-item>
+                        </core-menu>
+                     </core-dropdown>
+                  </core-menu-button>
+            </template>
+         </core-toolbar>
+      </paper-shadow>
+      <div id="content" content layout vertical center>
+         <!-- get page -->
+      </div>
+      <footer layout vertical center>
+         <nav layout horizontal justified>
+            <a href="/">home</a>
+            <a href="/?start">getting started</a>
+            <a href="/?feedback">feedback</a>
+            <a href="/?plugins">plugins</a>
+            <a href="/?docs">docs</a>
+         </nav>
+      </footer>
+   </template>
+   <script>
+      (function () {
+         'use strict';
+
+         Polymer({
+            ready: function(){
+               var url = window.location.href,
+                   content = this.$.content,
+                   query = url.match(/\?[\w\d\-_]+$/);
+                   
+               if (query !== null) {
+                  query = query.toString().replace(/^\?/,"");
+               };
+
+               if (query === "start") {
+                  this.page = "<p>getting started</p>";
+               }
+               else if (query === "feedback") {
+                  this.page = "<p>feedback</p>";
+               }
+               else if (query === "plugins") {
+                  this.page = "<p>plugins</p>";
+               }
+               else if (query === "docs") {
+                  this.page = "<p>docs</p>";
+               }
+
+               content.innerHTML = this.page;
+            },
+            page: '<nanoplex-downloads bgcolor="#283593" color="white"></nanoplex-downloads><nanoplex-donate bgcolor="white" color="black"></nanoplex-donate><nanoplex-pugins-preveiw bgcolor="#283593" color="white"></nanoplex-pugins-preveiw>'
+         });
+      })();
+   </script>
+</polymer-element>

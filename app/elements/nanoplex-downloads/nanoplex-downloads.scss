@@ -1,0 +1,38 @@
+:host {
+	display: block;
+	width: 100%;
+
+	.info {
+	    padding: 1em;
+	    margin-top: 3em;
+	    width: 606px;
+
+	    p {
+	    	line-height: 140%;
+	    }
+	}
+	.downloads {
+		margin-bottom: 3em;
+		
+		paper-button {
+			background: #2196F3;
+			color: white;
+			margin: 0 1em 1em 0;
+
+			core-icon {
+				margin-right: .5em;
+			}
+		}
+
+		paper-button:last-child {
+			background: white;
+			color: black;
+		}
+	}
+}
+
+@media all and (max-width:650px) {
+	.info {
+		width: 90%;
+	}
+}

@@ -1,0 +1,16 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="n-prod" noscript>
+  <template>
+    <link rel="stylesheet" href="n-prod.css">
+    <core-ajax auto url="/file.json" handleAs="json" response="{{prods}}"></core-ajax>
+
+    <template repeat="{{prod in prods}}">
+      <div class="prod">
+        <h1>{{prod.name}}</h1>
+      </div>
+    </template>
+  </template>
+</polymer-element>
+

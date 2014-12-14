@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/core-icons/core-icons.html">
+<link rel="import" href="/bower_components/core-icons/social-icons.html">
+
+<polymer-element name="nanoplex-downloads" layout vertical center attributes="bgcolor color">
+   <template >
+      <link rel="stylesheet" href="nanoplex-downloads.css">
+      <div class="info" layout vertical>
+         <h1>Welcome</h1>
+         <p>My name is Mathias, i needed a backend for my costumers, so i decided to create my own CMS and make it open source. The idea is you  can build your frontend however you want, and it will be pretty easy to get to work with this CMS, if you know c# and asp.net and some javascript. There are loads of comments but just write a mail to me it there is something you dont understand. If you are new see the <a style="color:{{color}}" href="/?start">getting started</a> page</p>
+      </div>
+      <div class="downloads" layout horizontal center-justified>
+            <paper-button raised on-tap="{{download}}"><core-icon icon="cloud-download"></core-icon>download</paper-button>
+            <paper-button raised on-tap="{{github}}"><core-icon icon="social:post-github"></core-icon>github repo</paper-button>
+         </div>
+   </template>
+   <script>
+      (function () {
+         'use strict';
+
+         Polymer({
+            ready: function() {
+               this.setAttribute('style','background:' + this.bgcolor + ';color:' + this.color);
+            },
+            download: function() {
+               window.location.href = "https://github.com/nanoplex/cms-2.0/archive/master.zip";
+            },
+            github: function() {
+               window.open("https://github.com/nanoplex/cms-2.0", "_blank");
+            }
+         });
+
+      })();
+   </script>
+</polymer-element>
