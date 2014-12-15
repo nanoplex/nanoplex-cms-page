@@ -14,20 +14,6 @@
 
 	.plugins {
 		overflow-x: scroll;
-
-		.plugin {
-			padding: 1em 3em;
-			min-width: 300px;
-
-			paper-btton {
-				margin-left: 0;
-			}
-			a {
-				paper-button {
-					color: #2196F3;
-				}
-			}
-		}
 	}
 }
 
