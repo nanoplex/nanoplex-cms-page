@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="n-plugin-prewiev" attributes="plugin">
+  <template>
+    <link rel="stylesheet" href="n-plugin-prewiev.css">
+    <div class="plugin" layout vertical center>
+      <div class="text">
+        <h2>{{plugin.name}}</h2>
+        <p>{{plugin.description}}</p>
+      </div>
+      <div class="buttons" layout horizontal end-justified>
+        <paper-button on-tap="{{download}}">download</paper-button>
+        <paper-button on-tap="{{read}}">read more</paper-button>
+      </div>
+    </div>  
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        ready: function() {
+
+        },
+        download: function() {
+          window.location.href = "https://github.com/nanoplex/plugin-" + this.plugin.name + "/archive/master.zip";
+        },
+        read: function() {
+          console.log(this.parentNode());
+        },
+        plugin: {"name":"Error","description":""}
+      });
+
+    })();
+  </script>
+</polymer-element>

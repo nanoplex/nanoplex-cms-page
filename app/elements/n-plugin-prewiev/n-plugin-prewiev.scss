@@ -1,0 +1,25 @@
+:host {
+	display: block;
+	.plugin {
+		padding: 1em 3em;
+		min-width: 300px;
+		
+		.text {
+			min-width: 120px;
+			p {
+				line-height: 130%;
+			}
+		}
+
+		.buttons {
+			width: 100%;
+
+			paper-btton:first-child {
+				margin-left: 0;
+			}
+			paper-button:last-child {
+				color: #2196F3;
+			}
+		}
+	}
+}
