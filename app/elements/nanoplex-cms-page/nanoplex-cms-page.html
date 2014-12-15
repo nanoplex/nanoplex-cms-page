@@ -22,23 +22,23 @@
 
       <paper-shadow z="1">
          <core-toolbar>
-            <a href="/" layout horizontal center flex><img src="/img/logo.svg"/><p>Nanoplex CMS</p></a>
+            <div on-tap="{{home}}" layout horizontal center flex><img src="/img/logo.svg"/><p>Nanoplex CMS</p></div>
             <template if="{{!smallScreen}}">
-               <a href="/?start">getting started</a>
-               <a href="/?feedback">feedback</a>
-               <a href="/?plugins">plugins</a>
-               <a href="/?docs">docs</a>
+               <paper-button id="start" on-tap="{{start}}">getting started</paper-button>
+               <paper-button id="feed" on-tap="{{feedback}}">feedback</paper-button>
+               <paper-button id="plug" on-tap="{{plugins}}">plugins</paper-button>
+               <paper-button id="docs" on-tap="{{docs}}">docs</paper-button>
             </template>
             <template if="{{smallScreen}}">
                <core-menu-button>
                   <paper-icon-button icon="menu"></paper-icon-button>
                      <core-dropdown class="dropdown" halign="right" layered>
                         <core-menu>
-                           <paper-item><a href="/">home</a></paper-item>
-                           <paper-item><a href="/?start">getting started</a></paper-item>
-                           <paper-item><a href="/?feedback">feedback</a></paper-item>
-                           <paper-item><a href="/?plugins">plugins</a></paper-item>
-                           <paper-item><a href="/?docs">docs</a></paper-item>
+                           <paper-item on-tap="{{home}}">home</paper-item>
+                           <paper-item id="feed" on-tap="{{feedback}}">getting started</paper-item>
+                           <paper-item id="plug" on-tap="{{plugins}}">feedback</paper-item>
+                           <paper-item id="docs" on-tap="{{docs}}">plugins</paper-item>
+                           <paper-item id="start" on-tap="{{start}}">docs</paper-item>
                         </core-menu>
                      </core-dropdown>
                   </core-menu-button>
@@ -50,11 +50,11 @@
       </div>
       <footer layout vertical center>
          <nav layout horizontal justified>
-            <a href="/">home</a>
-            <a href="/?start">getting started</a>
-            <a href="/?feedback">feedback</a>
-            <a href="/?plugins">plugins</a>
-            <a href="/?docs">docs</a>
+            <paper-button on-tap="{{home}}">home</paper-button>
+            <paper-button on-tap="{{start}}">getting started</paper-button>
+            <paper-button on-tap="{{feedback}}">feedback</paper-button>
+            <paper-button on-tap="{{plugins}}">plugins</paper-button>
+            <paper-button on-tap="{{docs}}">docs</paper-button>
          </nav>
       </footer>
    </template>
@@ -64,30 +64,59 @@
 
          Polymer({
             ready: function(){
-               var url = window.location.href,
-                   content = this.$.content,
-                   query = url.match(/\?[\w\d\-_]+$/);
-                   
-               if (query !== null) {
-                  query = query.toString().replace(/^\?/,"");
-               };
+               this.$.content.innerHTML = this.page;
+            },
+            page: '<nanoplex-downloads bgcolor="#283593" color="white"></nanoplex-downloads><nanoplex-donate bgcolor="white" color="black"></nanoplex-donate><nanoplex-pugins-preveiw bgcolor="#283593" color="white"></nanoplex-pugins-preveiw>',
+            query: "home",
+            queryChanged: function(oldValue, query) {
+               console.log("test");
 
-               if (query === "start") {
-                  this.page = "<p>getting started</p>";
+               this.$.start.removeAttribute('class');
+               this.$.feed.removeAttribute('class');
+               this.$.plug.removeAttribute('class');
+               this.$.docs.removeAttribute('class');
+
+               if (query !== "home") {
+                  query = query.toString().replace(/^\#/,"");
                }
+
+               if (query === "home") {
+                  this.page = '<nanoplex-downloads bgcolor="#283593" color="white"></nanoplex-downloads><nanoplex-donate bgcolor="white" color="black"></nanoplex-donate><nanoplex-pugins-preveiw bgcolor="#283593" color="white"></nanoplex-pugins-preveiw>';
+               }
+               else if (query === "start") {
+                  this.page = "<p>getting started</p>";
+                  this.$.start.setAttribute('class','selected');
+               }  
                else if (query === "feedback") {
                   this.page = "<p>feedback</p>";
+                  this.$.feed.setAttribute('class','selected');
                }
                else if (query === "plugins") {
                   this.page = "<p>plugins</p>";
+                  this.$.plug.setAttribute('class','selected');
                }
                else if (query === "docs") {
                   this.page = "<p>docs</p>";
+                  this.$.docs.setAttribute('class','selected');
                }
 
-               content.innerHTML = this.page;
+               this.$.content.innerHTML = this.page;
             },
-            page: '<nanoplex-downloads bgcolor="#283593" color="white"></nanoplex-downloads><nanoplex-donate bgcolor="white" color="black"></nanoplex-donate><nanoplex-pugins-preveiw bgcolor="#283593" color="white"></nanoplex-pugins-preveiw>'
+            home: function() {
+               this.query = "home";
+            },
+            start: function() {
+               this.query = "start";
+            },
+            feedback: function() {
+               this.query = "feedback";
+            },
+            plugins: function() {
+               this.query = "plugins";
+            },
+            docs: function() {
+               this.query = "docs";
+            }
          });
       })();
    </script>
